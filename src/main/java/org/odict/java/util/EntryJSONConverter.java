@@ -118,7 +118,8 @@ public class EntryJSONConverter {
     }
 
     public String convert(Entry entry) {
-        return "{" + this.addEtymologies(entry) + "}";
+        if (entry == null) return "{}";
+        else return "{" + this.addEtymologies(entry) + "}";
     }
 
     class DefinitionsObject {

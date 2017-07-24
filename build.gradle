@@ -30,9 +30,6 @@ shadowJar {
     version = version
     configurations = [project.configurations.compile]
     zip64 = true
-    transform(com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer) {
-        resource = 'reference.conf'
-    }
 }
 
 jar.enabled = false
