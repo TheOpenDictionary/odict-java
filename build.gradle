@@ -23,6 +23,7 @@ targetCompatibility = 1.8
 dependencies {
     compile 'com.github.davidmoten:flatbuffers-java:1.7.0.1'
     compile 'org.xerial.snappy:snappy-java:1.1.4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
 }
 
 shadowJar {

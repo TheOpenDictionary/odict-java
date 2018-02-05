@@ -1,137 +1,107 @@
 package org.odict.java.util;
 
-import org.odict.java.schema.Entry;
-import org.odict.java.schema.Etymology;
-import org.odict.java.schema.Group;
-import org.odict.java.schema.Usage;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.odict.java.models.Entry;
+import org.odict.java.models.Group;
+import org.odict.java.models.Usage;
+import org.odict.java.models.Etymology;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntryJSONConverter {
+    private ObjectMapper mapper = new ObjectMapper();
 
-    private String addDefinitions(DefinitionsObject obj) {
-        String output = "\"definitions\":[";
-        int length = obj.definitionsLength();
+    private List<String> getDefinitions(DefinitionsObject obj) {
+        List<String> definitions = new ArrayList<>();
 
-        for (int i = 0;  i < length; i++) {
-            output += "\"" + obj.definitions(i) + "\"";
-            if (i != length - 1) output += ",";
-        }
+        for (int i = 0;  i < obj.definitionsLength(); i++)
+            definitions.add(obj.definitions(i));
 
-        output += "]";
-
-        return output;
+        return definitions;
     }
 
-    private String addGroups(Usage usage) {
-        String output = "\"groups\":[";
-        int length = usage.groupsLength();
-        List<String> properties = new ArrayList<>();
+    private List<Group> getGroups(org.odict.java.schema.Usage usage) {
+        List<Group> groups = new ArrayList<>();
 
-        for (int i = 0; i < length; i++) {
-            Group group = usage.groups(i);
-            String id = group.id().trim();
-            String description = group.description().trim();
+        for (int i = 0; i < usage.groupsLength(); i++) {
+            org.odict.java.schema.Group g = usage.groups(i);
 
-            output += "{";
+            Group group = new Group();
+            String id = g.id().trim();
+            String description = g.description().trim();
 
-            if (id.length() > 0)
-                properties.add(String.format("\"id\":\"%s\"", id));
+            if (id.length() > 0) group.setID(id);
+            if (description.length() > 0) group.setDescription(description);
+            if (g.definitionsLength() > 0) group.setDefinitions(
+                this.getDefinitions(new DefinitionsObject(g))
+            );
 
-            if (description.length() > 0)
-                properties.add(String.format("\"description\":\"%s\"", description));
-
-            if (group.definitionsLength() > 0)
-                properties.add(this.addDefinitions(new DefinitionsObject(group)));
-
-            output += String.join(",", properties);
-            output += "}";
-
-            properties.clear();
-
-            if (i != length - 1) output += ",";
+            groups.add(group);
         }
 
-        output += "]";
-
-        return output;
+        return groups;
     }
 
-    private String addUsages(Etymology etymology) {
-        String output = "\"usages\":[";
-        int length = etymology.usagesLength();
-        List<String> properties = new ArrayList<>();
+    private List<Usage> getUsages(org.odict.java.schema.Etymology etymology) {
+        List<Usage> usages = new ArrayList<>();
 
-        for (int i = 0; i < length; i++) {
-            Usage usage = etymology.usages(i);
-            String pos = usage.pos().trim();
+        for (int i = 0; i < etymology.usagesLength(); i++) {
+            org.odict.java.schema.Usage u = etymology.usages(i);
 
-            output += "{";
+            Usage usage = new Usage();
+            String pos = u.pos().trim();
 
-            if (pos.length() > 0)
-                properties.add(String.format("\"pos\":\"%s\"", pos));
+            if (pos.length() > 0) usage.setPOS(pos);
+            if (u.groupsLength() > 0) usage.setGroups(this.getGroups(u));
+            if (u.definitionsLength() > 0) usage.setDefinitions(
+                this.getDefinitions(new DefinitionsObject(u))
+            );
 
-            if (usage.groupsLength() > 0)
-                properties.add(this.addGroups(usage));
-
-            if (usage.definitionsLength() > 0)
-                properties.add(this.addDefinitions(new DefinitionsObject(usage)));
-
-            output += String.join(",", properties);
-            output += "}";
-
-            properties.clear();
-
-            if (i != length - 1) output += ",";
+            usages.add(usage);
         }
 
-        output += "]";
-
-        return output;
+        return usages;
     }
 
-    private String addEtymologies(Entry entry) {
-        String output = "\"etymologies\":[";
-        int length = entry.etymologiesLength();
+    private List<Etymology> getEtymologies(org.odict.java.schema.Entry entry) {
+        List<Etymology> etymologies = new ArrayList<>();
 
-        for (int i = 0; i < length; i++) {
-            Etymology etymology = entry.etymologies(i);
-            String description = etymology.description().trim();
+        for (int i = 0; i < entry.etymologiesLength(); i++) {
+            org.odict.java.schema.Etymology ety = entry.etymologies(i);
 
-            output += "{";
+            Etymology etymology = new Etymology();
+            String description = ety.description().trim();
 
-            if (description.length() > 0)
-                output += String.format("\"description\":\"%s\",", description);
+            if (description.length() > 0) etymology.setDescription(description);
+            if (ety.usagesLength() > 0) etymology.setUsages(this.getUsages(ety));
 
-            if (etymology.usagesLength() > 0)
-                output += this.addUsages(etymology);
-
-            output += "}";
-
-            if (i != length - 1) output += ",";
+            etymologies.add(etymology);
         }
 
-        output += "]";
-
-        return output;
+        return etymologies;
     }
 
-    public String convert(Entry entry) {
-        if (entry == null) return "{}";
-        else return "{" + this.addEtymologies(entry) + "}";
+    public String convert(org.odict.java.schema.Entry e) throws JsonProcessingException {
+        Entry entry = new Entry();
+        if (e == null) return "{}";
+        else {
+            entry.setEtymologies(this.getEtymologies(e));
+            return this.mapper.writeValueAsString(entry);
+        }
     }
 
     class DefinitionsObject {
-        private Group group;
-        private Usage usage;
+        private org.odict.java.schema.Group group;
+        private org.odict.java.schema.Usage usage;
 
-        DefinitionsObject(Group group) {
+        DefinitionsObject(org.odict.java.schema.Group group) {
             this.group = group;
             this.usage = null;
         }
 
-        DefinitionsObject(Usage usage) {
+        DefinitionsObject(org.odict.java.schema.Usage usage) {
             this.usage = usage;
             this.group = null;
         }

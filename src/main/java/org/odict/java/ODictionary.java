@@ -1,5 +1,6 @@
 package org.odict.java;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.odict.java.schema.Dictionary;
 import org.odict.java.util.EntryJSONConverter;
 
@@ -18,7 +19,7 @@ public class ODictionary {
      * @param word
      * @return String
      */
-    public String getEntryAsJSON(String word) {
+    public String getEntryAsJSON(String word) throws JsonProcessingException {
         return new EntryJSONConverter().convert(this.dictionary.entriesByKey(word));
     }
 
