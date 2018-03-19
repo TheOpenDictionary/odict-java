@@ -15,28 +15,33 @@ enum POS:byte {
 }
 
 table Etymology {
+    id:ulong;
     description:string;
     usages:[Usage];
 }
 
 table Group {
-    id:string;
+    id:ulong;
     description:string;
     definitions:[string];
 }
 
 table Usage {
+    id:ulong;
     pos:string;
     definitions:[string];
     groups:[Group];
 }
 
 table Entry {
+    id:ulong;
     term:string (key);
     etymologies:[Etymology];
 }
 
 table Dictionary {
+    id:string;
+    name:string;
     entries:[Entry];
 }
 
