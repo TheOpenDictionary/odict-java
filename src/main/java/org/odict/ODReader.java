@@ -1,6 +1,5 @@
-package org.odict.java;
+package org.odict;
 
-import org.odict.java.schema.Dictionary;
 import org.xerial.snappy.Snappy;
 
 import java.io.*;
@@ -37,7 +36,7 @@ public class ODReader {
         byte[] uncompressed = Snappy.uncompress(compressed);
 
         // Convert to dictionary and return
-        Dictionary dict = Dictionary.getRootAsDictionary(ByteBuffer.wrap(uncompressed));
+        schema.Dictionary dict = schema.Dictionary.getRootAsDictionary(ByteBuffer.wrap(uncompressed));
 
         return (dict != null) ? new ODictionary(version, dict) : null;
     }

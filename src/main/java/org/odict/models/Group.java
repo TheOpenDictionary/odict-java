@@ -1,4 +1,4 @@
-package org.odict.java.models;
+package org.odict.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -6,15 +6,15 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Group {
-    private String id;
+    private long id;
     private String description;
     private List<String> definitions;
 
-    public String getID() {
+    public long getID() {
         return id;
     }
 
-    public void setID(String id) {
+    public void setID(long id) {
         this.id = id;
     }
 
