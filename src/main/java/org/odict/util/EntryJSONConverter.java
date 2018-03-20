@@ -1,11 +1,11 @@
-package org.odict.java.util;
+package org.odict.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.odict.java.models.Entry;
-import org.odict.java.models.Group;
-import org.odict.java.models.Usage;
-import org.odict.java.models.Etymology;
+import org.odict.models.Entry;
+import org.odict.models.Etymology;
+import org.odict.models.Group;
+import org.odict.models.Usage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +22,18 @@ public class EntryJSONConverter {
         return definitions;
     }
 
-    private List<Group> getGroups(org.odict.java.schema.Usage usage) {
+    private List<Group> getGroups(schema.Usage usage) {
         List<Group> groups = new ArrayList<>();
 
         for (int i = 0; i < usage.groupsLength(); i++) {
-            org.odict.java.schema.Group g = usage.groups(i);
+            schema.Group g = usage.groups(i);
 
             Group group = new Group();
-            String id = g.id().trim();
+            long id = g.id();
             String description = g.description().trim();
 
-            if (id.length() > 0) group.setID(id);
+            group.setID(id);
+
             if (description.length() > 0) group.setDescription(description);
             if (g.definitionsLength() > 0) group.setDefinitions(
                 this.getDefinitions(new DefinitionsObject(g))
@@ -40,15 +41,14 @@ public class EntryJSONConverter {
 
             groups.add(group);
         }
-
         return groups;
     }
 
-    private List<Usage> getUsages(org.odict.java.schema.Etymology etymology) {
+    private List<Usage> getUsages(schema.Etymology etymology) {
         List<Usage> usages = new ArrayList<>();
 
         for (int i = 0; i < etymology.usagesLength(); i++) {
-            org.odict.java.schema.Usage u = etymology.usages(i);
+            schema.Usage u = etymology.usages(i);
 
             Usage usage = new Usage();
             String pos = u.pos().trim();
@@ -65,11 +65,11 @@ public class EntryJSONConverter {
         return usages;
     }
 
-    private List<Etymology> getEtymologies(org.odict.java.schema.Entry entry) {
+    private List<Etymology> getEtymologies(schema.Entry entry) {
         List<Etymology> etymologies = new ArrayList<>();
 
         for (int i = 0; i < entry.etymologiesLength(); i++) {
-            org.odict.java.schema.Etymology ety = entry.etymologies(i);
+            schema.Etymology ety = entry.etymologies(i);
 
             Etymology etymology = new Etymology();
             String description = ety.description().trim();
@@ -83,7 +83,7 @@ public class EntryJSONConverter {
         return etymologies;
     }
 
-    public String convert(org.odict.java.schema.Entry e) throws JsonProcessingException {
+    public String convert(schema.Entry e) throws JsonProcessingException {
         Entry entry = new Entry();
         if (e == null) return "{}";
         else {
@@ -93,15 +93,15 @@ public class EntryJSONConverter {
     }
 
     class DefinitionsObject {
-        private org.odict.java.schema.Group group;
-        private org.odict.java.schema.Usage usage;
+        private schema.Group group;
+        private schema.Usage usage;
 
-        DefinitionsObject(org.odict.java.schema.Group group) {
+        DefinitionsObject(schema.Group group) {
             this.group = group;
             this.usage = null;
         }
 
-        DefinitionsObject(org.odict.java.schema.Usage usage) {
+        DefinitionsObject(schema.Usage usage) {
             this.usage = usage;
             this.group = null;
         }

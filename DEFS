@@ -1,0 +1,46 @@
+SCHEMA_SRCS = ["Dictionary", "Entry", "Etymology", "Group", "POS", "Usage"]
+SCHEMA_TARGETS = []
+
+def remote_jar(name, url, hash, deps = []):
+    remote_file(
+        name = name + "-source",
+        out = name + "-source.jar",
+        url = url,
+        sha1 = hash
+    )
+    prebuilt_jar(
+        name = name,
+        binary_jar = ":" + name + "-source",
+        deps=deps,
+        visibility=["PUBLIC"]
+    )
+
+def build_schema():
+    remote_file(
+        name = "dl-schema",
+        out = "schema.fbs",
+        url = "https://raw.githubusercontent.com/odict/odict/master/src/schema.fbs",
+        sha1 = "e8423a70ebcf2222869ddb6ccb8e408843a79242",
+        visibility = ["//:gen-schema"]
+    )
+    genrule(
+        name = "gen-schema",
+        srcs = [":dl-schema"],
+        cmd = "flatc -j -o $OUT $SRCS",
+        out = ".",
+        visibility = ["//:schema"]
+    )
+    for src in SCHEMA_SRCS:
+        target = "get-schema-" + src
+        genrule(
+            name = target,
+            cmd = "cp -a $(location :gen-schema)/schema/" + src + ".java $OUT",
+            out = src + ".java"
+        )
+        SCHEMA_TARGETS.append(":" + target)
+    java_library(
+        name = "schema",
+        srcs = SCHEMA_TARGETS,
+        deps = ["//:flatbuffers"],
+        visibility = ["PUBLIC"]
+    )

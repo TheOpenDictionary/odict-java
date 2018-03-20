@@ -29,13 +29,18 @@ boolean hasEntry = dict.hasEntry("some entry");
 short version = dict.getVersion();
 ```
 
-Setting It Up Locally
----------------------
-After cloning the repo, make sure you have `flatc` installed and run:
+Building
+--------
+To build the ODict Java library, you'll need a copy of `flatc` installed and Facebook's `buck` build tool. Then just 
+run:
 
 ```bash
-$ ./init schema
+$ buck build it
 ```
 
 Also make sure you have a recent version of Java (8+ preferably). Everything else should run just peachy. It helps if 
-you're on a UNIX system, though.
+you're on a UNIX system, though. To export the library to a file, just add the `--out` option:
+
+```bash
+$ buck build it --out odict-java.jar
+```

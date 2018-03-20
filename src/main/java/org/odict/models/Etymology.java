@@ -1,4 +1,4 @@
-package org.odict.java.models;
+package org.odict.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

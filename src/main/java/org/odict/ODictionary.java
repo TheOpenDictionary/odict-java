@@ -1,14 +1,13 @@
-package org.odict.java;
+package org.odict;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.odict.java.schema.Dictionary;
-import org.odict.java.util.EntryJSONConverter;
+import org.odict.util.EntryJSONConverter;
 
 public class ODictionary {
-    private Dictionary dictionary;
+    private schema.Dictionary dictionary;
     private short version;
 
-    public ODictionary(short version, Dictionary dictionary) {
+    public ODictionary(short version, schema.Dictionary dictionary) {
         this.dictionary = dictionary;
         this.version = version;
     }

@@ -1,0 +1,16 @@
+include_defs("//DEFS")
+
+build_schema()
+
+java_library(
+    name = "odict-java-lib",
+    srcs = glob(["**/*.java"]),
+    deps = [":schema", "//:flatbuffers", "//:snappy", "//:jackson-core", "//:jackson-annotations", "//:jackson-databind"],
+    visibility = ["PUBLIC"]
+)
+
+java_binary(
+    name = "odict-java",
+    deps = [":odict-java-lib"],
+    visibility = ["PUBLIC"]
+)
