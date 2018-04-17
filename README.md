@@ -35,12 +35,14 @@ To build the ODict Java library, you'll need a copy of `flatc` installed and Fac
 run:
 
 ```bash
-$ buck build it
+$ bazel build it
 ```
 
 Also make sure you have a recent version of Java (8+ preferably). Everything else should run just peachy. It helps if 
-you're on a UNIX system, though. To export the library to a file, just add the `--out` option:
+you're on a UNIX system, though. To export the library to a file, build the JAR:
 
 ```bash
-$ buck build it --out odict-java.jar
+$ bazel build jar
 ```
+
+This will create a fat JAR file at bazel-bin/src/main/java/libodict.jar.

@@ -13,8 +13,8 @@ genrule(
   ]
 )
 
-java_binary(
-  name = "odict_java",
+java_library(
+  name = "odict",
   deps = [
     "@flatbuffers//:flatbuffers",
     "@jackson_core//jar",
