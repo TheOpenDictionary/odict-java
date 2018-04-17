@@ -1,0 +1,1 @@
+alias(name = "it", actual = "//src/main/java:odict_java")
