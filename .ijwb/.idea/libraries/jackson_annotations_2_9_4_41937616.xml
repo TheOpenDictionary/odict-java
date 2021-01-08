@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jackson-annotations-2.9.4_41937616">
+    <CLASSES>
+      <root url="jar:///private/var/tmp/_bazel_tnickerson/cc06cbb1f05732e64053c81b64667321/execroot/__main__/bazel-out/darwin-fastbuild/bin/external/maven/v1/https/jcenter.bintray.com/com/fasterxml/jackson/core/jackson-annotations/2.9.4/jackson-annotations-2.9.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -2,59 +2,46 @@
 #     MAVEN DEPENDENCIES     #
 ##############################
 
-# Snappy
-# ======
-maven_jar(
-    name = "snappy",
-    artifact = "org.xerial.snappy:snappy-java:1.1.4",
-    sha1 = "d94ae6d7d27242eaa4b6c323f881edbb98e48da6"
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
+
+RULES_JVM_EXTERNAL_TAG = "4.0"
+
+RULES_JVM_EXTERNAL_SHA = "31701ad93dbfe544d597dbe62c9a1fdd76d81d8a9150c2bf1ecf928ecdf97169"
+
+http_archive(
+    name = "rules_jvm_external",
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 
-# Jackson
-# =======
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-# Core
-# ----
-maven_jar(
-    name = "jackson_core",
-    artifact = "com.fasterxml.jackson.core:jackson-core:2.9.4",
-    sha1 = "a9a71ec1aa37da47db168fede9a4a5fb5e374320"
+maven_install(
+    artifacts = [
+        "org.xerial.snappy:snappy-java:1.1.4",
+        "com.fasterxml.jackson.core:jackson-core:2.9.4",
+        "com.fasterxml.jackson.core:jackson-annotations:2.9.4",
+        "com.fasterxml.jackson.core:jackson-databind:2.9.4",
+        "com.google.flatbuffers:flatbuffers-java:1.12.0",
+    ],
+    maven_install_json = "//:maven_install.json",
+    repositories = [
+        "https://jcenter.bintray.com/",
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
 )
 
-# Annotations
-# -----------
-maven_jar(
-    name = "jackson_annotations",
-    artifact = "com.fasterxml.jackson.core:jackson-annotations:2.9.4",
-    sha1 = "1380b592ad70439346b5d954ad202be048451c5a"
-)
+load("@maven//:defs.bzl", "pinned_maven_install")
 
-# Databind
-# --------
-maven_jar(
-    name = "jackson_databind",
-    artifact = "com.fasterxml.jackson.core:jackson-databind:2.9.4",
-    sha1 = "498bbc3b94f566982c7f7c6d4d303fce365529be"
-)
-
-############################
-#     WEB DEPENDENCIES     #
-############################
-
-# Flatbuffers
-# ===========
-new_http_archive(
-    name = "flatbuffers",
-    url = "https://github.com/google/flatbuffers/archive/v1.9.0.zip",
-    sha256 = "81bb76a503a624f45bebad96fac1fea98d90d0c84e7771ff96ed168c19168de7",
-    strip_prefix = "flatbuffers-1.9.0",
-    build_file_content = """java_library(name = "flatbuffers", srcs = glob(["java/**/*.java"]), visibility = ["//visibility:public"])"""
-)
+pinned_maven_install()
 
 # ODict Schema
 # ============
 http_file(
     name = "schema",
-    url = "https://raw.githubusercontent.com/odict/odict/master/src/schema.fbs",
-    sha256 = "88963751f1e0f9a7afddab2fe96425501c7ea6ca3a77d3e6f1633a4971e9dd01",
+    downloaded_file_path = "schema.fbs",
+    sha256 = "10d9a90c24faedcc85c4282da337702702c5372040798d04c54e451e8c306d0c",
+    urls = ["https://raw.githubusercontent.com/odict/odict/master/go/schema/schema.fbs"],
 )

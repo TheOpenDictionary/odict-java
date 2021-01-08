@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_kotlin_app/android_kotlin_app.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_kotlin_app/android_kotlin_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-bin/bazel-bin.iml" filepath="$PROJECT_DIR$/bazel-bin/bazel-bin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/src/bazel-odict-java.iml" filepath="$PROJECT_DIR$/bazel-odict-java/src/bazel-odict-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-out/bazel-out.iml" filepath="$PROJECT_DIR$/bazel-out/bazel-out.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/bazel-out/bazel-out1.iml" filepath="$PROJECT_DIR$/bazel-odict-java/bazel-out/bazel-out1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/tests/integration/integration.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/tests/integration/integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/java-export/java-export.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/java-export/java-export.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/src/java_tools/java_tools.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/src/java_tools/java_tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_local_test/src/main/main.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_local_test/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/scala_akka/src/main/main1.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/scala_akka/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/spring_boot/src/main/main2.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/spring_boot/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_instrumentation_test/src/main/main3.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_instrumentation_test/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/migration/migration.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/migration/migration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/odict-java.iml" filepath="$PROJECT_DIR$/src/odict-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/pom_file_generation/pom_file_generation.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/pom_file_generation/pom_file_generation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/private/private.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/private/private.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/protobuf-java/protobuf-java.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/protobuf-java/protobuf-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/rules_jvm_external.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/rules_jvm_external.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_instrumentation_test/src/test/test.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_instrumentation_test/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/spring_boot/src/test/test1.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/spring_boot/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_local_test/src/test/test2.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/android_local_test/src/test/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/scala_akka/src/test/test3.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/examples/scala_akka/src/test/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/third_party/third_party.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/third_party/third_party.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/tools/tools.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/tools/tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/src/tools/tools1.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/bazel_tools/src/tools/tools1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/tests/unit/unit.iml" filepath="$PROJECT_DIR$/bazel-odict-java/external/rules_jvm_external/tests/unit/unit.iml" />
+    </modules>
+  </component>
+</project>

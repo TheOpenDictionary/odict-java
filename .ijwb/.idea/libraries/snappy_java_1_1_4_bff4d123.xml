@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="snappy-java-1.1.4_bff4d123">
+    <CLASSES>
+      <root url="jar:///private/var/tmp/_bazel_tnickerson/cc06cbb1f05732e64053c81b64667321/execroot/__main__/bazel-out/darwin-fastbuild/bin/external/maven/v1/https/jcenter.bintray.com/org/xerial/snappy/snappy-java/1.1.4/snappy-java-1.1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
